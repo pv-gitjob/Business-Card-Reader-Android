@@ -1,15 +1,22 @@
 package com.praveenv.businesscardreader;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -33,10 +40,26 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     private static final int GALLERY_REQUEST = 1889;
 
+    TextView readText;
+    ImageView businessCardView;
+    TextView nameText;
+    TextView phoneText;
+    TextView emailText;
+    TextView companyText;
+    TextView addressText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        readText = findViewById(R.id.readText);
+        businessCardView = findViewById(R.id.businessCard);
+        nameText = findViewById(R.id.nameText);
+        phoneText = findViewById(R.id.phoneText);
+        emailText = findViewById(R.id.emailText);
+        companyText = findViewById(R.id.companyText);
+        addressText = findViewById(R.id.addressText);
 
         Button getBusinessCardBtn = findViewById(R.id.getBusinessCard);
         getBusinessCardBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +68,44 @@ public class MainActivity extends AppCompatActivity {
                 pickFromGallery();
             }
         });
+
+        Button addContactBtn = findViewById(R.id.addToContacts);
+        addContactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addingContact();
+            }
+        });
     }
 
-    private void pickFromGallery() {
+    public void addingContact() {
+        Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+        intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+
+        intent
+                .putExtra(ContactsContract.Intents.Insert.NAME, nameText.getText())
+                .putExtra(ContactsContract.Intents.Insert.PHONE, phoneText.getText())
+                .putExtra(ContactsContract.Intents.Insert.PHONE, ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
+                .putExtra(ContactsContract.Intents.Insert.EMAIL, emailText.getText())
+                .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                .putExtra(ContactsContract.Intents.Insert.POSTAL, addressText.getText())
+                .putExtra(ContactsContract.Intents.Insert.POSTAL, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
+        ;
+
+        clearFields();
+    }
+
+    public void clearFields() {
+        readText.setText("Press the get button below to begin");
+        DrawableCompat.setTint(businessCardView.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary));
+        nameText.setText("");
+        phoneText.setText("");
+        emailText.setText("");
+        companyText.setText("");
+        addressText.setText("");
+    }
+
+    public void pickFromGallery() {
         //Create an Intent with action as ACTION_PICK
         Intent intent = new Intent(Intent.ACTION_PICK);
         // Sets the type as image/*. This ensures only components of type image are selected
@@ -67,12 +125,7 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode){
                 case GALLERY_REQUEST:
                     Uri imageUri = data.getData();
-/*
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inJustDecodeBounds = false;
-                    options.inSampleSize = 6;
-                    Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
-*/
+
                     Bitmap bitmap = null;
                     try {
                         bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
@@ -84,11 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //Will get back to this
                     String[] details = recognizedText.split(" ");
-                    TextView nameText = findViewById(R.id.nameText);
-                    TextView phoneText = findViewById(R.id.phoneText);
-                    TextView emailText = findViewById(R.id.emailText);
-                    TextView companyText = findViewById(R.id.companyText);
-                    TextView addressText = findViewById(R.id.addressText);
+
 
                     nameText.setText(recognizedText);
                     phoneText.setText(recognizedText);
@@ -96,15 +145,13 @@ public class MainActivity extends AppCompatActivity {
                     companyText.setText(recognizedText);
                     addressText.setText(recognizedText);
 
-                    TextView readText = findViewById(R.id.readText);
                     readText.setText(recognizedText);
-                    ImageView businessCardView = findViewById(R.id.businessCard);
                     businessCardView.setImageURI(imageUri);
                     break;
             }
     }
 
-    private void setUpTesseractData(){
+    public void setUpTesseractData(){
         try{
             File dir = getExternalFilesDir("/tessdata");
             if(!dir.exists()){
@@ -132,13 +179,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getText(Bitmap bitmap){
+    public String getText(Bitmap bitmap){
         TessBaseAPI tessBaseAPI = new TessBaseAPI();
         tessBaseAPI.init(getExternalFilesDir("/").getPath() + "/", "eng");
-        tessBaseAPI.setImage(bitmap);
+        tessBaseAPI.setImage(toGrayscale(bitmap));
         String retStr = tessBaseAPI.getUTF8Text();
         tessBaseAPI.end();
         return retStr;
+    }
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal)
+    {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
     }
 
 }
