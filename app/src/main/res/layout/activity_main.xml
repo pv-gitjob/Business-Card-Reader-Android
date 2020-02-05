@@ -6,6 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/nameBtn6"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="3dp"
+        android:text="Fax:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/faxText"
+        app:layout_constraintTop_toBottomOf="@+id/nameBtn5" />
+
+    <Button
+        android:id="@+id/nameBtn5"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="3dp"
+        android:text="Address:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/addressText"
+        app:layout_constraintTop_toBottomOf="@+id/nameBtn4" />
+
+    <Button
+        android:id="@+id/nameBtn4"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="3dp"
+        android:text="Company:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/companyText"
+        app:layout_constraintTop_toBottomOf="@+id/nameBtn3" />
+
+    <Button
+        android:id="@+id/nameBtn3"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="3dp"
+        android:text="E-mail:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/emailText"
+        app:layout_constraintTop_toBottomOf="@+id/nameBtn2" />
+
+    <Button
+        android:id="@+id/nameBtn2"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="3dp"
+        android:text="Phone:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/phoneText"
+        app:layout_constraintTop_toBottomOf="@+id/nameBtn" />
+
+    <EditText
+        android:id="@+id/faxText"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressText" />
+
     <TextView
         android:id="@+id/readText"
         android:layout_width="361dp"
@@ -41,9 +107,8 @@
         android:id="@+id/nameText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
@@ -54,8 +119,7 @@
         android:id="@+id/phoneText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
@@ -66,97 +130,29 @@
         android:id="@+id/emailText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneText" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Phone:"
-        app:layout_constraintEnd_toStartOf="@+id/phoneText"
-        app:layout_constraintHorizontal_bias="0.702"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
     <EditText
         android:id="@+id/companyText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Company:"
-        app:layout_constraintEnd_toStartOf="@+id/companyText"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="E-mail:"
-        app:layout_constraintEnd_toStartOf="@+id/emailText"
-        app:layout_constraintHorizontal_bias="0.693"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Address:"
-        app:layout_constraintEnd_toStartOf="@+id/addressText"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:text="Name:"
-        app:layout_constraintEnd_toStartOf="@+id/nameText"
-        app:layout_constraintHorizontal_bias="0.702"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getBusinessCard" />
-
     <EditText
         android:id="@+id/addressText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
@@ -167,12 +163,11 @@
         android:id="@+id/addToContacts"
         android:layout_width="361sp"
         android:layout_height="35sp"
-        android:layout_marginTop="15dp"
         android:text="Add to Contacts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressText"
+        app:layout_constraintTop_toBottomOf="@+id/faxText"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -180,5 +175,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="21dp" />
+        app:layout_constraintGuide_begin="25dp" />
+
+    <Button
+        android:id="@+id/nameBtn"
+        android:layout_width="79dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="3dp"
+        android:text="Name:"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/nameText"
+        app:layout_constraintTop_toBottomOf="@+id/getBusinessCard" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
