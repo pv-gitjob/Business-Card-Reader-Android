@@ -71,12 +71,13 @@ class ContactInfo {
 
     private void clearFields() {
         readText.setText("Press the get button below to begin");
-        DrawableCompat.setTint(businessCardView.getDrawable(), ContextCompat.getColor(context, R.color.colorPrimary));
+        //DrawableCompat.setTint(businessCardView.getDrawable(), ContextCompat.getColor(context, R.color.colorPrimary));
         nameText.setText("");
         phoneText.setText("");
         emailText.setText("");
         companyText.setText("");
         addressText.setText("");
+        faxText.setText("");
     }
 
     void addingContact() {

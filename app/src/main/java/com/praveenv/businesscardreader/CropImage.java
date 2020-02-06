@@ -1,6 +1,6 @@
 package com.praveenv.businesscardreader;
 
-public class cropImage {
+public class CropImage {
 
 
 }

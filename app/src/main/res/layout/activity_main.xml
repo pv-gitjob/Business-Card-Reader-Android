@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/nameBtn6"
         android:layout_width="79dp"
         android:layout_height="33dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
+        android:background="@drawable/white_border"
         android:text="Fax:"
+        android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/faxText"
         app:layout_constraintTop_toBottomOf="@+id/nameBtn5" />
@@ -21,9 +24,11 @@
         android:id="@+id/nameBtn5"
         android:layout_width="79dp"
         android:layout_height="33dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
+        android:background="@drawable/white_border"
         android:text="Address:"
+        android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/addressText"
         app:layout_constraintTop_toBottomOf="@+id/nameBtn4" />
@@ -32,6 +37,8 @@
         android:id="@+id/nameBtn4"
         android:layout_width="79dp"
         android:layout_height="33dp"
+        android:background="@drawable/white_border"
+        android:textColor="@color/white"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
         android:text="Company:"
@@ -43,9 +50,11 @@
         android:id="@+id/nameBtn3"
         android:layout_width="79dp"
         android:layout_height="33dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
+        android:background="@drawable/white_border"
         android:text="E-mail:"
+        android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/emailText"
         app:layout_constraintTop_toBottomOf="@+id/nameBtn2" />
@@ -54,9 +63,11 @@
         android:id="@+id/nameBtn2"
         android:layout_width="79dp"
         android:layout_height="33dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
+        android:background="@drawable/white_border"
         android:text="Phone:"
+        android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/phoneText"
         app:layout_constraintTop_toBottomOf="@+id/nameBtn" />
@@ -64,11 +75,13 @@
     <EditText
         android:id="@+id/faxText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressText" />
 
@@ -77,9 +90,11 @@
         android:layout_width="361dp"
         android:layout_height="85dp"
         android:layout_marginTop="5dp"
+        android:background="@drawable/primary_border"
         android:gravity="center"
+        android:textColor="@color/white"
         android:text="Press the get button below to begin"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -89,16 +104,19 @@
         android:layout_width="361dp"
         android:layout_height="184dp"
         android:scaleType="fitXY"
+        android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/readText"
-        app:srcCompat="@color/colorPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/readText" />
 
     <Button
         android:id="@+id/getBusinessCard"
         android:layout_width="361dp"
         android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/white_border"
         android:text="Get Business Card"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/businessCard" />
@@ -106,56 +124,66 @@
     <EditText
         android:id="@+id/nameText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getBusinessCard" />
 
     <EditText
         android:id="@+id/phoneText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <EditText
         android:id="@+id/emailText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneText" />
 
     <EditText
         android:id="@+id/companyText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
     <EditText
         android:id="@+id/addressText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="15sp"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/companyText" />
 
@@ -163,6 +191,8 @@
         android:id="@+id/addToContacts"
         android:layout_width="361sp"
         android:layout_height="35sp"
+        android:background="@drawable/white_border"
+        android:textColor="@color/white"
         android:text="Add to Contacts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,9 +211,11 @@
         android:id="@+id/nameBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="3dp"
+        android:background="@drawable/white_border"
         android:text="Name:"
+        android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/nameText"
         app:layout_constraintTop_toBottomOf="@+id/getBusinessCard" />
