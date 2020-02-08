@@ -8,7 +8,20 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/nameBtn6"
+        android:id="@+id/cameraBtn"
+        android:layout_width="180dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/white_border"
+        android:text="Camera"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessCard" />
+
+    <Button
+        android:id="@+id/faxBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
         android:layout_marginTop="7dp"
@@ -18,10 +31,10 @@
         android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/faxText"
-        app:layout_constraintTop_toBottomOf="@+id/nameBtn5" />
+        app:layout_constraintTop_toBottomOf="@+id/addressBtn" />
 
     <Button
-        android:id="@+id/nameBtn5"
+        android:id="@+id/addressBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
         android:layout_marginTop="7dp"
@@ -31,10 +44,10 @@
         android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/addressText"
-        app:layout_constraintTop_toBottomOf="@+id/nameBtn4" />
+        app:layout_constraintTop_toBottomOf="@+id/companyBtn" />
 
     <Button
-        android:id="@+id/nameBtn4"
+        android:id="@+id/companyBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
         android:background="@drawable/white_border"
@@ -44,10 +57,10 @@
         android:text="Company:"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/companyText"
-        app:layout_constraintTop_toBottomOf="@+id/nameBtn3" />
+        app:layout_constraintTop_toBottomOf="@+id/emailBtn" />
 
     <Button
-        android:id="@+id/nameBtn3"
+        android:id="@+id/emailBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
         android:layout_marginTop="7dp"
@@ -57,10 +70,10 @@
         android:textColor="@color/white"
         android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@+id/emailText"
-        app:layout_constraintTop_toBottomOf="@+id/nameBtn2" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneBtn" />
 
     <Button
-        android:id="@+id/nameBtn2"
+        android:id="@+id/phoneBtn"
         android:layout_width="79dp"
         android:layout_height="33dp"
         android:layout_marginTop="7dp"
@@ -111,13 +124,14 @@
 
     <Button
         android:id="@+id/getBusinessCard"
-        android:layout_width="361dp"
+        android:layout_width="180dp"
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/white_border"
-        android:text="Get Business Card"
+        android:text="Gallery"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/businessCard" />
 

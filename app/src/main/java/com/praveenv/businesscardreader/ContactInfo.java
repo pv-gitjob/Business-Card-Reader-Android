@@ -1,5 +1,6 @@
 package com.praveenv.businesscardreader;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageActivity;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
@@ -50,7 +55,6 @@ class ContactInfo {
     }
 
     void setFields(Uri imageUri) {
-
         Bitmap bitmap = null;
         try {
             bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
@@ -96,4 +100,43 @@ class ContactInfo {
 
         clearFields();
     }
+
+    void setSpecificField(int field, Uri imageUri) {
+        Bitmap bitmap = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String recognizedText = ocr.getText(bitmap);
+
+        switch (field) {
+            case 1:
+                nameText.setText(recognizedText);
+                break;
+
+            case 2:
+                phoneText.setText(recognizedText);
+                break;
+
+            case 3:
+                emailText.setText(recognizedText);
+                break;
+
+            case 4:
+                companyText.setText(recognizedText);
+                break;
+
+            case 5:
+                addressText.setText(recognizedText);
+                break;
+
+            case 6:
+                faxText.setText(recognizedText);
+                break;
+        }
+
+    }
+
+
 }
