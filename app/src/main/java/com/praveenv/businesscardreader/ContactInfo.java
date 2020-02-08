@@ -1,6 +1,5 @@
 package com.praveenv.businesscardreader;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,12 +8,6 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageActivity;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 
@@ -55,22 +48,8 @@ class ContactInfo {
     }
 
     void setFields(Uri imageUri) {
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String recognizedText = ocr.getText(bitmap);
-
-        readText.setText(recognizedText);
-        businessCardView.setImageURI(imageUri);
-        nameText.setText(recognizedText);
-        phoneText.setText(recognizedText);
-        emailText.setText(recognizedText);
-        companyText.setText(recognizedText);
-        addressText.setText(recognizedText);
-        faxText.setText(recognizedText);
+        setAllThread thread = new setAllThread(imageUri);
+        thread.run();
     }
 
     private void clearFields() {
@@ -102,41 +81,85 @@ class ContactInfo {
     }
 
     void setSpecificField(int field, Uri imageUri) {
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String recognizedText = ocr.getText(bitmap);
-
-        switch (field) {
-            case 1:
-                nameText.setText(recognizedText);
-                break;
-
-            case 2:
-                phoneText.setText(recognizedText);
-                break;
-
-            case 3:
-                emailText.setText(recognizedText);
-                break;
-
-            case 4:
-                companyText.setText(recognizedText);
-                break;
-
-            case 5:
-                addressText.setText(recognizedText);
-                break;
-
-            case 6:
-                faxText.setText(recognizedText);
-                break;
-        }
-
+        setFieldThread thread = new setFieldThread(field, imageUri);
+        thread.run();
     }
+
+
+    private class setAllThread implements Runnable {
+
+        Uri imageUri;
+
+        setAllThread(Uri imageUri) {
+            this.imageUri = imageUri;
+        }
+
+        public void run() {
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String recognizedText = ocr.getText(bitmap);
+
+            readText.setText(recognizedText);
+            businessCardView.setImageURI(imageUri);
+            nameText.setText(recognizedText);
+            phoneText.setText(recognizedText);
+            emailText.setText(recognizedText);
+            companyText.setText(recognizedText);
+            addressText.setText(recognizedText);
+            faxText.setText(recognizedText);
+        }
+    }
+
+    private class setFieldThread implements Runnable {
+
+        int field;
+        Uri imageUri;
+
+        setFieldThread(int field, Uri imageUri) {
+            this.field = field;
+            this.imageUri = imageUri;
+        }
+
+        public void run() {
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String recognizedText = ocr.getText(bitmap);
+            switch (field) {
+                case 1:
+                    nameText.setText(recognizedText);
+                    break;
+
+                case 2:
+                    phoneText.setText(recognizedText);
+                    break;
+
+                case 3:
+                    emailText.setText(recognizedText);
+                    break;
+
+                case 4:
+                    companyText.setText(recognizedText);
+                    break;
+
+                case 5:
+                    addressText.setText(recognizedText);
+                    break;
+
+                case 6:
+                    faxText.setText(recognizedText);
+                    break;
+            }
+        }
+    }
+
 
 
 }
