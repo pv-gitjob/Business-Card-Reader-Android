@@ -17,9 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 class OCR {
-
     private Context context;
-
     OCR(Context context) {
         this.context = context;
         setUpTesseractData();
@@ -78,5 +76,4 @@ class OCR {
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         return bmpGrayscale;
     }
-
 }

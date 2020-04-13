@@ -1,7 +1,5 @@
 package com.praveenv.businesscardreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,12 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-
 public class MainActivity extends AppCompatActivity {
-
     private static final int CAMERA_REQUEST = 1888;
     private static final int GALLERY_REQUEST = 1889;
     private static final int FIELD_BUTTON_REQUEST = 2002;
@@ -129,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void pickFromGallery() {
@@ -174,7 +169,4 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
-
 }

@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 class ContactInfo {
     private Context context;
@@ -84,6 +87,7 @@ class ContactInfo {
     }
 
     private class setAllThread extends AsyncTask<Void, Void, String> {
+        ArrayList<String> text;
         Uri imageUri;
         setAllThread(Uri imageUri) {
             this.imageUri = imageUri;
@@ -101,14 +105,40 @@ class ContactInfo {
 
         @Override
         protected void onPostExecute(String recognizedText) {
+            text = new ArrayList<String>(Arrays.asList(recognizedText.split(" ")));
+
             readText.setText(recognizedText);
             businessCardView.setImageURI(imageUri);
             nameText.setText(recognizedText);
-            phoneText.setText(recognizedText);
-            emailText.setText(recognizedText);
+            phoneText.setText(getPhone());
+            emailText.setText(getEmail());
             companyText.setText(recognizedText);
             addressText.setText(recognizedText);
-            faxText.setText(recognizedText);
+            faxText.setText(getPhone());
+        }
+
+        private String getEmail() {
+            String email = "";
+            for (int i=0; i<text.size(); i++){
+                if (text.get(i).contains("@")) {
+                    email = text.get(i);
+                    text.remove(i);
+                    break;
+                }
+            }
+            return email;
+        }
+
+        private String getPhone() {
+            String phone = "";
+            for (int i=0; i<text.size(); i++){
+                if (text.get(i).contains("+1") || text.get(i).contains("\\d\\.\\d") || text.get(i).contains("\\d\\s\\d")||text.get(i).contains("(")) {
+                    phone = text.get(i);
+                    text.remove(i);
+                    break;
+                }
+            }
+            return phone;
         }
     }
 
