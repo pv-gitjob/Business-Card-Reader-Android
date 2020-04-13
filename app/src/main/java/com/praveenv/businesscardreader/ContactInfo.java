@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.widget.ImageView;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import java.io.IOException;
 
 class ContactInfo {
-
     private Context context;
     private TextView readText;
     private ImageView businessCardView;
@@ -49,7 +49,7 @@ class ContactInfo {
 
     void setFields(Uri imageUri) {
         setAllThread thread = new setAllThread(imageUri);
-        thread.run();
+        thread.execute();
     }
 
     private void clearFields() {
@@ -66,7 +66,6 @@ class ContactInfo {
     void addingContact() {
         Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
         intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-
         intent
                 .putExtra(ContactsContract.Intents.Insert.NAME, nameText.getText())
                 .putExtra(ContactsContract.Intents.Insert.PHONE, phoneText.getText())
@@ -76,33 +75,32 @@ class ContactInfo {
                 .putExtra(ContactsContract.Intents.Insert.POSTAL, addressText.getText())
                 .putExtra(ContactsContract.Intents.Insert.POSTAL, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
         ;
-
         clearFields();
     }
 
     void setSpecificField(int field, Uri imageUri) {
         setFieldThread thread = new setFieldThread(field, imageUri);
-        thread.run();
+        thread.execute();
     }
 
-
-    private class setAllThread implements Runnable {
-
+    private class setAllThread extends AsyncTask<Void, Void, String> {
         Uri imageUri;
-
         setAllThread(Uri imageUri) {
             this.imageUri = imageUri;
         }
 
-        public void run() {
-            Bitmap bitmap = null;
+        @Override
+        protected String doInBackground(Void... params) {
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+                return ocr.getText(bitmap);
             } catch (IOException e) {
-                e.printStackTrace();
+                return "";
             }
-            String recognizedText = ocr.getText(bitmap);
+        }
 
+        @Override
+        protected void onPostExecute(String recognizedText) {
             readText.setText(recognizedText);
             businessCardView.setImageURI(imageUri);
             nameText.setText(recognizedText);
@@ -114,52 +112,47 @@ class ContactInfo {
         }
     }
 
-    private class setFieldThread implements Runnable {
-
+    private class setFieldThread extends AsyncTask<Void, Void, String> {
         int field;
         Uri imageUri;
-
         setFieldThread(int field, Uri imageUri) {
             this.field = field;
             this.imageUri = imageUri;
         }
 
-        public void run() {
-            Bitmap bitmap = null;
+        @Override
+        protected String doInBackground(Void... params) {
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+                return ocr.getText(bitmap);
             } catch (IOException e) {
-                e.printStackTrace();
+                return "";
             }
-            String recognizedText = ocr.getText(bitmap);
+        }
+
+        @Override
+        protected void onPostExecute(String recognizedText) {
             switch (field) {
                 case 1:
                     nameText.setText(recognizedText);
                     break;
-
                 case 2:
                     phoneText.setText(recognizedText);
                     break;
-
                 case 3:
                     emailText.setText(recognizedText);
                     break;
-
                 case 4:
                     companyText.setText(recognizedText);
                     break;
-
                 case 5:
                     addressText.setText(recognizedText);
                     break;
-
                 case 6:
                     faxText.setText(recognizedText);
                     break;
             }
         }
     }
-
-
 
 }
